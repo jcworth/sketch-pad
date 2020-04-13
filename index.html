@@ -8,7 +8,6 @@
 <body>
     <style>
         :root {
-            /* width: 80%; */
             --squareColor: #807b7f;
         }
 
@@ -22,7 +21,7 @@
 
         .info {
             text-align: center;
-            height: 150px;
+            height: 180px;
             padding: 20px;
         }
 
@@ -32,7 +31,6 @@
 
         #grid-container {
             width: 80%;
-            /* height: 100%; */
             margin: 0 auto;
             display: flex;
             align-items: center;
@@ -60,11 +58,12 @@
 
     <div class="info">
         <h1>Sketchpad</h1>
-        <h3>Pick a colour and draw something</h3>
-        <label for="Grid Size Select">Select a grid size</label>
+        <h3>Pick a colour and draw something!</h3>
+        <label for="Grid Size Select">Select a grid size: </label>
         <input name="Grid Size Select" id="gridSelect" type="range" min="8" max="32">
-        <label for="Colour Select">Select a colour!</label>
+        <label for="Colour Select">Select a colour: </label>
         <input name="Colour Select" id="color" type="color" value="#807b7f">
+        <p>Mouseover the grid size selector to <strong>reset</strong></p>
     </div>
     <div id="grid-container">
         <div class="" id="grid">
