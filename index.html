@@ -1,0 +1,114 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch</title>
+</head>
+<body>
+    <style>
+        html {
+            /* width: 80%; */
+        }
+
+        body {
+            margin: 0 auto;
+        }
+
+        .info {
+            /* width: 80%; */
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            /* text-align: center; */
+            height: 100px;
+
+        }
+        input {
+            font-size: 2rem;
+        }
+
+        #grid-container {
+            width: 80%;
+            /* height: 100%; */
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;;
+        }
+
+        #grid {
+            border: 1px solid black;
+            height: 600px;
+            width: 600px;
+            display: grid;
+            grid-template-columns: repeat(64, 1fr);
+            grid-template-rows: repeat(64, 1fr);
+            grid-column-gap: 0px;
+            grid-row-gap: 0px;
+        }
+
+        .square {
+            /* width: 10px;
+            height: 10px; */
+            grid: 1;
+        }
+        .color {
+            background-color: black;
+        }
+
+
+
+    </style>
+
+    <div class="info">
+        <input id="gridInput"   type="text" placeholder="Enter a grid size"></input>
+        <button id="submit" type="submit">Submit</button>
+    </div>
+    <div id="grid-container">
+        <div class="" id="grid">
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const input = document.getElementById('gridInput');
+        const submit = document.getElementById('submit');
+        const squares = document.querySelectorAll('.square');        
+            
+        // create grid with correct number of cells
+        // -> must create div elements
+        
+        function initGrid(args) {
+            grid.style.gridTemplateColumns = `repeat(${args}, 1fr)`
+            grid.style.gridTemplateRows = `repeat(${args}, 1fr)`
+            
+            for(i = 0; i < (args * args); i++){
+                // console.log(createDiv)
+                let createDiv = document.createElement('div')
+                createDiv.className = 'square'
+                grid.insertAdjacentElement('afterbegin', createDiv);
+            };
+        }
+        
+        function colorSquare(target) {
+            console.log(target)
+            // if
+            target.classList.add('color');
+        }
+        
+        grid.addEventListener('mouseover', function(event) {
+            if(event.target && event.target.nodeName == 'DIV') {
+                colorSquare(event.target)
+            }
+        });
+        
+        submit.addEventListener('click', (event) => {
+            initGrid(input.value)
+        });
+        
+
+        // squares.forEach(square => square.addEventListener('mouseover', colorSquare));
+    </script>
+
+</body>
+</html>
