@@ -1,5 +1,6 @@
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sketch</title>
@@ -8,7 +9,11 @@
     <style>
         :root {
             /* width: 80%; */
-            --squareColor: #000000;
+            --squareColor: #807b7f;
+        }
+
+        html {
+            font-family: 'PT Sans', sans-serif;
         }
 
         body {
@@ -16,14 +21,11 @@
         }
 
         .info {
-            /* width: 80%; */
-            display: flex;
-            justify-content: center;
-            align-items: center; 
-            /* text-align: center; */
-            height: 100px;
-
+            text-align: center;
+            height: 150px;
+            padding: 20px;
         }
+
         input {
             font-size: 2rem;
         }
@@ -38,21 +40,18 @@
         }
 
         #grid {
-            border: 1px solid black;
-            height: 600px;
-            width: 600px;
-            display: none;
-            grid-template-columns: repeat(64, 1fr);
-            grid-template-rows: repeat(64, 1fr);
-            grid-column-gap: 0px;
-            grid-row-gap: 0px;
+            border: 5px solid black;
+            height: 500px;
+            width: 500px;
+            border-radius: 5px;
+            display: grid;
         }
 
         .square {
-            /* width: 10px;
-            height: 10px; */
             grid: 1;
+            border: 1px dotted black;
         }
+        
         .color {
             background-color: var(--squareColor);
         }
@@ -60,9 +59,12 @@
     </style>
 
     <div class="info">
-        <input id="gridInput"   type="text" placeholder="Enter a grid size"></input>
-        <button id="submit" type="submit">Submit</button>
-        <input id="color" type="color">
+        <h1>Sketchpad</h1>
+        <h3>Pick a colour and draw something</h3>
+        <label for="Grid Size Select">Select a grid size</label>
+        <input name="Grid Size Select" id="gridSelect" type="range" min="8" max="32">
+        <label for="Colour Select">Select a colour!</label>
+        <input name="Colour Select" id="color" type="color" value="#807b7f">
     </div>
     <div id="grid-container">
         <div class="" id="grid">
@@ -71,20 +73,17 @@
 
     <script>
         const grid = document.getElementById('grid');
-        const input = document.getElementById('gridInput');
-        const submit = document.getElementById('submit');
         const squares = document.querySelectorAll('.square');        
         const color = document.getElementById('color');
-        // console.log(color.value)
+        const gridSelect = document.getElementById('gridSelect')
         
         function initGrid(args) {
-            
+            grid.innerHTML = '';
             grid.style.display = 'grid'
             grid.style.gridTemplateColumns = `repeat(${args}, 1fr)`
             grid.style.gridTemplateRows = `repeat(${args}, 1fr)`
             
             for(i = 0; i < (args * args); i++){
-                // console.log(createDiv)
                 let createDiv = document.createElement('div')
                 createDiv.className = 'square'
                 grid.insertAdjacentElement('afterbegin', createDiv);
@@ -92,12 +91,10 @@
         }
 
         function changeColor() {
-            console.log(this.value)
             document.documentElement.style.setProperty('--squareColor', this.value);
         }
         
         function colorSquare(target) {
-            // console.log(target)
             if(target.classList.contains('square')) {
                 target.classList.add('color');
             };
@@ -109,13 +106,15 @@
             }
         });
         
-        submit.addEventListener('click', (event) => {
-            initGrid(input.value)
-            window.alert = 'Grid created!'
+        gridSelect.addEventListener('mousemove', (event) => {
+            console.log(event)
+            initGrid(event.target.value);
         });
 
         color.addEventListener('change', changeColor);
     
+        initGrid(16);
+
     </script>
 
 </body>
