@@ -6,8 +6,9 @@
 </head>
 <body>
     <style>
-        html {
+        :root {
             /* width: 80%; */
+            --squareColor: #000000;
         }
 
         body {
@@ -40,7 +41,7 @@
             border: 1px solid black;
             height: 600px;
             width: 600px;
-            display: grid;
+            display: none;
             grid-template-columns: repeat(64, 1fr);
             grid-template-rows: repeat(64, 1fr);
             grid-column-gap: 0px;
@@ -53,16 +54,15 @@
             grid: 1;
         }
         .color {
-            background-color: black;
+            background-color: var(--squareColor);
         }
-
-
 
     </style>
 
     <div class="info">
         <input id="gridInput"   type="text" placeholder="Enter a grid size"></input>
         <button id="submit" type="submit">Submit</button>
+        <input id="color" type="color">
     </div>
     <div id="grid-container">
         <div class="" id="grid">
@@ -74,11 +74,12 @@
         const input = document.getElementById('gridInput');
         const submit = document.getElementById('submit');
         const squares = document.querySelectorAll('.square');        
-            
-        // create grid with correct number of cells
-        // -> must create div elements
+        const color = document.getElementById('color');
+        // console.log(color.value)
         
         function initGrid(args) {
+            
+            grid.style.display = 'grid'
             grid.style.gridTemplateColumns = `repeat(${args}, 1fr)`
             grid.style.gridTemplateRows = `repeat(${args}, 1fr)`
             
@@ -89,11 +90,17 @@
                 grid.insertAdjacentElement('afterbegin', createDiv);
             };
         }
+
+        function changeColor() {
+            console.log(this.value)
+            document.documentElement.style.setProperty('--squareColor', this.value);
+        }
         
         function colorSquare(target) {
-            console.log(target)
-            // if
-            target.classList.add('color');
+            // console.log(target)
+            if(target.classList.contains('square')) {
+                target.classList.add('color');
+            };
         }
         
         grid.addEventListener('mouseover', function(event) {
@@ -104,10 +111,11 @@
         
         submit.addEventListener('click', (event) => {
             initGrid(input.value)
+            window.alert = 'Grid created!'
         });
-        
 
-        // squares.forEach(square => square.addEventListener('mouseover', colorSquare));
+        color.addEventListener('change', changeColor);
+    
     </script>
 
 </body>
