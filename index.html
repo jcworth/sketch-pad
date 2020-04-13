@@ -1,0 +1,121 @@
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch</title>
+</head>
+<body>
+    <style>
+        :root {
+            /* width: 80%; */
+            --squareColor: #807b7f;
+        }
+
+        html {
+            font-family: 'PT Sans', sans-serif;
+        }
+
+        body {
+            margin: 0 auto;
+        }
+
+        .info {
+            text-align: center;
+            height: 150px;
+            padding: 20px;
+        }
+
+        input {
+            font-size: 2rem;
+        }
+
+        #grid-container {
+            width: 80%;
+            /* height: 100%; */
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;;
+        }
+
+        #grid {
+            border: 5px solid black;
+            height: 500px;
+            width: 500px;
+            border-radius: 5px;
+            display: grid;
+        }
+
+        .square {
+            grid: 1;
+            border: 1px dotted black;
+        }
+        
+        .color {
+            background-color: var(--squareColor);
+        }
+
+    </style>
+
+    <div class="info">
+        <h1>Sketchpad</h1>
+        <h3>Pick a colour and draw something</h3>
+        <label for="Grid Size Select">Select a grid size</label>
+        <input name="Grid Size Select" id="gridSelect" type="range" min="8" max="32">
+        <label for="Colour Select">Select a colour!</label>
+        <input name="Colour Select" id="color" type="color" value="#807b7f">
+    </div>
+    <div id="grid-container">
+        <div class="" id="grid">
+        </div>
+    </div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        const squares = document.querySelectorAll('.square');        
+        const color = document.getElementById('color');
+        const gridSelect = document.getElementById('gridSelect')
+        
+        function initGrid(args) {
+            grid.innerHTML = '';
+            grid.style.display = 'grid'
+            grid.style.gridTemplateColumns = `repeat(${args}, 1fr)`
+            grid.style.gridTemplateRows = `repeat(${args}, 1fr)`
+            
+            for(i = 0; i < (args * args); i++){
+                let createDiv = document.createElement('div')
+                createDiv.className = 'square'
+                grid.insertAdjacentElement('afterbegin', createDiv);
+            };
+        }
+
+        function changeColor() {
+            document.documentElement.style.setProperty('--squareColor', this.value);
+        }
+        
+        function colorSquare(target) {
+            if(target.classList.contains('square')) {
+                target.classList.add('color');
+            };
+        }
+        
+        grid.addEventListener('mouseover', function(event) {
+            if(event.target && event.target.nodeName == 'DIV') {
+                colorSquare(event.target)
+            }
+        });
+        
+        gridSelect.addEventListener('mousemove', (event) => {
+            console.log(event)
+            initGrid(event.target.value);
+        });
+
+        color.addEventListener('change', changeColor);
+    
+        initGrid(16);
+
+    </script>
+
+</body>
+</html>
