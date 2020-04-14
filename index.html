@@ -22,7 +22,11 @@
         .info {
             text-align: center;
             height: 180px;
-            padding: 20px;
+            padding: 20px 0px 10px 0px;
+        }
+    
+        h1 {
+            margin: 0;
         }
 
         input {
@@ -73,7 +77,7 @@
     <script>
         const grid = document.getElementById('grid');
         const squares = document.querySelectorAll('.square');        
-        const color = document.getElementById('color');
+        const colorSelect = document.getElementById('color');
         const gridSelect = document.getElementById('gridSelect')
         
         function initGrid(args) {
@@ -110,7 +114,7 @@
             initGrid(event.target.value);
         });
 
-        color.addEventListener('change', changeColor);
+        colorSelect.addEventListener('change', changeColor);
     
         initGrid(16);
 
