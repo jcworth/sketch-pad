@@ -8,7 +8,7 @@
 <body>
     <style>
         :root {
-            --squareColor: #807b7f;
+            --squareColor: #0013C4;
         }
 
         html {
@@ -17,6 +17,10 @@
 
         body {
             margin: 0 auto;
+            background: #1f1c2c;
+            background: -webkit-linear-gradient(to right, #1f1c2c, #928dab); 
+            background: linear-gradient(to right, #1f1c2c, #928dab);
+            color: white;
         }
 
         .info {
@@ -52,6 +56,7 @@
         .square {
             grid: 1;
             border: 1px dotted lightgrey;
+            background: white;
         }
         
         .color {
@@ -66,7 +71,7 @@
         <label for="Grid Size Select">Select a grid size: </label>
         <input name="Grid Size Select" id="gridSelect" type="range" min="8" max="32">
         <label for="Colour Select">Select a colour: </label>
-        <input name="Colour Select" id="color" type="color" value="#807b7f">
+        <input name="Colour Select" id="color" type="color" value="#0013C4">
         <p>Mouseover the grid size selector to <strong>reset</strong></p>
     </div>
     <div id="grid-container">
